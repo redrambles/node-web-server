@@ -3,7 +3,7 @@ const hbs = require('hbs');
 const fs = require('fs');
 
 // Configure to use with heroku and local using 3000
-const port = process.env.PORT || 3000; 
+const port = process.env.PORT || 3100; 
 
 var app = express();
 
@@ -30,7 +30,8 @@ app.use((req, res, next) =>{
 //     // never calls next() = so program halts while this is running - serving maintenance.hbs no matter the url
 // });
 
-// app.use(express.static(__dirname + '/public'));
+// This allows us to load static pages like the help page
+app.use(express.static(__dirname + '/public'));
 
 hbs.registerHelper('getCurrentYear', () => {
     return new Date().getFullYear();
@@ -60,12 +61,36 @@ app.get('/projects', (req, res) => {
     });
 });
 
-app.get('/bad', (req, res) => {
-    res.send({
-        errorMessage: 'Unable to fulfill this request'
+app.use((req, res) => {
+  var err = new Error('Not Found');
+  err.status = 404;
+  //res.redirect('/bad');
+    res.render('404.hbs', { 
+        pageTitle: 'Page Not Found!',
+        page404message: 'Sorry - we couldn\'t find what you were looking for! Try the top navigation.'
     });
 });
+// app.use( (req, res, next) => {
+//   res.status(404);
+
+//   // respond with html page
+//   if (req.accepts('html')) {
+//     res.render('404.hbs', { 
+//         pageTitle: 'Page Not Found!',
+//         page404message: 'Sorry - we couldn\'t find what you were looking for! Try the top navigation.'
+//      });
+//   }
+
+//   // respond with json
+//   if (req.accepts('json')) {
+//     res.send({ error: 'Page not found' });
+//     return;
+//   }
+
+//   // default to plain-text. send()
+//   res.type('txt').send('Not found');
+// });
 
 app.listen(port, () => {
-    console.log('Server is up on port 3000');
+    console.log('Server is up on port 3100');
 });
