@@ -1,13 +1,23 @@
- 
+ /* Formatting */
 .clearfix:after {
   content: "";
   display: table;
   clear: both;
 }
+img {
+    max-width: 100%;
+    height: auto;
+    text-align: center;
+}
+
+/* General Styles */
 body {
      background-color: lemonchiffon;
      padding: 0 2em;
 }
+
+
+/* Header */
 .header {
     display: flex;
     flex-wrap: wrap;
@@ -28,4 +38,9 @@ body {
 }
 .nav-links:first-of-type {
     padding-left: 0;
+}
+
+/* 404 page */
+.page-404 {
+    background-color: rgba(255, 99, 71, .8);
 }

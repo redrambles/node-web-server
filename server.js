@@ -70,26 +70,6 @@ app.use((req, res) => {
         page404message: 'Sorry - we couldn\'t find what you were looking for! Try the top navigation.'
     });
 });
-// app.use( (req, res, next) => {
-//   res.status(404);
-
-//   // respond with html page
-//   if (req.accepts('html')) {
-//     res.render('404.hbs', { 
-//         pageTitle: 'Page Not Found!',
-//         page404message: 'Sorry - we couldn\'t find what you were looking for! Try the top navigation.'
-//      });
-//   }
-
-//   // respond with json
-//   if (req.accepts('json')) {
-//     res.send({ error: 'Page not found' });
-//     return;
-//   }
-
-//   // default to plain-text. send()
-//   res.type('txt').send('Not found');
-// });
 
 app.listen(port, () => {
     console.log('Server is up on port 3100');
